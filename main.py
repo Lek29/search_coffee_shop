@@ -34,7 +34,7 @@ def create_map():
 
 
 def main():
-    with open('coffee.json', 'r') as file:
+    with open('coffee.json', 'r', encoding='cp1251') as file:
         file_contents = file.read()
 
     file_with_list = loads(file_contents)
@@ -64,7 +64,8 @@ def main():
         )
         five_near_coffee_shop = sorted(cofee_shop_with_distance, key=lambda distance: distance['distance'])[:5:]
 
-    map_coffee_shop = folium.Map(location=start_coords, zoom_start=12)
+    initial_location = [55.7558, 37.6176]
+    map_coffee_shop = folium.Map(location=initial_location, zoom_start=12)
 
     for cofee_shop in five_near_coffee_shop:
         folium.Marker(

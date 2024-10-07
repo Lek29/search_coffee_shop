@@ -6,14 +6,14 @@ import folium
 from flask import Flask
 
 
-apikey_1 = os.getenv('API_KEY_TOKEN')
+APIKEY = os.getenv('API_KEY_TOKEN')
 
 
-def fetch_coordinates(apikey_1, address):
+def fetch_coordinates(apikey, address):
     base_url = "https://geocode-maps.yandex.ru/1.x"
     response = requests.get(base_url, params={
         "geocode": address,
-        "apikey": apikey_1,
+        "apikey": apikey,
         "format": "json",
     })
     response.raise_for_status()
@@ -40,7 +40,7 @@ def main():
     file_with_list = loads(file_contents)
 
     name_place = input('Где вы находитесь? ')
-    start_coords = fetch_coordinates(apikey_1, name_place)
+    start_coords = fetch_coordinates(APIKEY, name_place)
 
     cofee_shop_with_distance = []
 
